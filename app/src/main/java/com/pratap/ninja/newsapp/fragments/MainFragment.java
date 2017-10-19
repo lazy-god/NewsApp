@@ -119,6 +119,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemSelected
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        pbNews.setIndeterminate(true);
         switch (i) {
             case 0:
                 source = "the-times-of-india";

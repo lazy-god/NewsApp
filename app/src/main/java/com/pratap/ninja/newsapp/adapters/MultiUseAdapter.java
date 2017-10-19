@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -100,10 +101,8 @@ public class MultiUseAdapter extends RecyclerView.Adapter<MultiUseAdapter.MultiV
                     @Override
                     public void onClick(View view) {
                         setMark(false);
-                        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(articles.getUrl()));
-                        if (i.resolveActivity(context.getPackageManager()) != null) {
-                            context.startActivity(i);
-                        }
+                        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder().build();
+                        customTabsIntent.launchUrl(context, Uri.parse(articles.getUrl()));
                     }
                 });
             }

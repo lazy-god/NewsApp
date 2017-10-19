@@ -87,6 +87,7 @@ public class BusinessFragment extends Fragment implements AdapterView.OnItemSele
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d(TAG, "onItemSelected: " + adapterView.getItemAtPosition(i));
         Log.d(TAG, "onItemSelected: " + i);
+        pbBusiness.setIndeterminate(true);
         switch (i) {
             case 0:
                 source = "cnbc";

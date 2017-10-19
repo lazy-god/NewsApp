@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringDef;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -160,10 +161,9 @@ public class MainActivity extends AppCompatActivity
                         .commit();
                 break;
             case R.id.navBrowse:
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com"));
-                if (i.resolveActivity(getPackageManager()) != null) {
-                    this.startActivity(i);
-                }
+                String url = "https://google.com";
+                CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder().build();
+                customTabsIntent.launchUrl(this, Uri.parse(url));
                 break;
             case R.id.navNotes:
                 fm.beginTransaction()

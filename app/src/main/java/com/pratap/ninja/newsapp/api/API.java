@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 
 public interface API {
 
-    @GET("v1/articles?source=google-news&apiKey=0c79744f40544082a89092f81237200f")
+    @GET("v1/articles?source=new-scientist&apiKey=0c79744f40544082a89092f81237200f")
     Call<News> getGoogleNews(@Query("sortBy") String sortBy);
 
     @GET("v1/articles?apiKey=0c79744f40544082a89092f81237200f")

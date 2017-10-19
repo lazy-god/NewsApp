@@ -3,6 +3,7 @@ package com.pratap.ninja.newsapp.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,10 +83,8 @@ public class NewsAdapterHorizontal extends RecyclerView.Adapter<NewsAdapterHoriz
             ivLink.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(articles.getUrl()));
-                    if (i.resolveActivity(context.getPackageManager()) != null) {
-                        context.startActivity(i);
-                    }
+                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder().build();
+                    customTabsIntent.launchUrl(context, Uri.parse(articles.getUrl()));
                 }
             });
         }

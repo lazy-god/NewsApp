@@ -87,6 +87,7 @@ public class SportsFragment extends Fragment implements AdapterView.OnItemSelect
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d(TAG, "onItemSelected: " + adapterView.getItemAtPosition(i));
         Log.d(TAG, "onItemSelected: " + i);
+        pbSports.setIndeterminate(true);
         switch (i) {
             case 0:
                 source = "bbc-sport";

@@ -1,7 +1,10 @@
 package com.pratap.ninja.newsapp.adapters;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,8 @@ import com.pratap.ninja.newsapp.activities.MoviesActivity;
 import com.pratap.ninja.newsapp.models.Item;
 
 import java.util.ArrayList;
+
+import static com.pratap.ninja.newsapp.MainActivity.setMark;
 
 /**
  * Created by darsh on 11-10-2017.
@@ -55,7 +60,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     class MoviesViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivImage;
-        TextView tvTitle, tvDes, tvDate, tvVisit;
+        TextView tvTitle, tvDes, tvDate, tvVisit, tvRate;
 
         public MoviesViewHolder(View itemView) {
 
@@ -65,7 +70,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
             tvDes = itemView.findViewById(R.id.tvDescriptionMovies);
             tvDate = itemView.findViewById(R.id.tvDateMovies);
             tvVisit = itemView.findViewById(R.id.tvSee);
-
+            tvRate = itemView.findViewById(R.id.tvSearchRate);
         }
 
         void bindview(final Item result) {
@@ -88,6 +93,17 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
                     context.startActivity(new Intent(context, MoviesActivity.class)
                             .putExtra("Id", result.getId())
                     );
+                }
+            });
+
+            tvRate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setMark(false);
+                    String url = "https://google.com/search?q=" + "Ratings for " + result.getTitle();
+                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                    CustomTabsIntent customTabsIntent = builder.build();
+                    customTabsIntent.launchUrl(context, Uri.parse(url));
                 }
             });
         }

@@ -1,12 +1,17 @@
 package com.pratap.ninja.newsapp.adapters;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -58,17 +63,19 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
 
         ImageView ivImage;
         TextView tvTitleRole, tvTitleName;
-
+        LinearLayout llCast;
         public CastViewHolder(View itemView) {
 
             super(itemView);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvTitleName = itemView.findViewById(R.id.tvTitleName);
             tvTitleRole = itemView.findViewById(R.id.tvTitleRole);
-
+            llCast = itemView.findViewById(R.id.llCast);
         }
 
         void bindview(final Cast result) {
+            Log.d(TAG, "bindview: " + result.getName());
+            Log.d(TAG, "bindview: " + result.getId());
             String title = result.getName();
             String role = result.getCharacter();
             tvTitleRole.setText(role);
@@ -80,6 +87,16 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
             requestOptions.error(R.drawable.index);
             requestOptions.centerCrop();
             Glide.with(context).load(urlImage).apply(requestOptions).into(ivImage);
+
+            llCast.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = "https://google.com/search?q=" + result.getName();
+                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                    CustomTabsIntent customTabsIntent = builder.build();
+                    customTabsIntent.launchUrl(context, Uri.parse(url));
+                }
+            });
         }
     }
 }

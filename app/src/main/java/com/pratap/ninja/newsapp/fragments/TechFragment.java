@@ -88,6 +88,7 @@ public class TechFragment extends Fragment implements AdapterView.OnItemSelected
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d(TAG, "onItemSelected: " + adapterView.getItemAtPosition(i));
         Log.d(TAG, "onItemSelected: " + i);
+        pbTech.setIndeterminate(true);
         switch (i) {
             case 0:
                 source = "techradar";

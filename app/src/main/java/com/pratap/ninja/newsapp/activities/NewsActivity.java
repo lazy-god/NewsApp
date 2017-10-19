@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -80,10 +81,8 @@ public class NewsActivity extends AppCompatActivity {
             tvUrl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    if (i.resolveActivity(getPackageManager()) != null) {
-                        startActivity(i);
-                    }
+                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder().build();
+                    customTabsIntent.launchUrl(NewsActivity.this, Uri.parse(url));
                 }
             });
         }
